@@ -1,0 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-local-testing-tls
+  namespace: openshift-config
+spec:
+  secretName: api-local-testing-tls
+  duration: 2160h
+  renewBefore: 720h
+  issuerRef:
+    name: mkcert-issuer
+    kind: ClusterIssuer
+  commonName: api.sno.local.testing
+  dnsNames:
+    - api.sno.local.testing
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apps-local-testing-tls
+  namespace: openshift-ingress
+spec:
+  secretName: apps-local-testing-tls
+  duration: 2160h
+  renewBefore: 720h
+  issuerRef:
+    name: mkcert-issuer
+    kind: ClusterIssuer
+  commonName: "*.apps.sno.local.testing"
+  dnsNames:
+    - "*.apps.sno.local.testing"
